@@ -1,3 +1,13 @@
+/*
+MineCraft Miner is an application I wrote to automate tasks in minecraft, the name MineCraftMiner is a bit of misnomer
+as it does more tasks. 
+____________________
+Task 1 - Mine blocks in front of it, user must state the durability of the pickaxes in the hotbar, the current usage, and the number of pickaxes.
+___Partially done:___
+Task 2 - Intelligently search for Wood, move over to it, and mine it. It looks for the logs. 
+Task 3 - Automagically jump, place wood, and mine it. This is an exploit in the handling of a specific minecraft server (RSMV) which allows you to generate balance.
+*/
+
 package javaapplication12;
 //-10004943
 
@@ -12,17 +22,17 @@ import java.util.Scanner;
 public class JavaApplication12 {
 
     static Robot sonny;
-    static Scanner stdin = new Scanner(System.in);
+    static Scanner stdin = new Scanner(System.in); // Take input from the keyboard :D.
     /*
     Stone - 131
     Iron  - 250
      */
-    static int dur;
-    int tempDur;
-    static int crossx;
+    static int dur; //The durability of the types of pickaxes in the hotbar.
+    int tempDur; // The lowest durbility of any one pickaxe.
+    static int crossx; 
     static int crossy;
-    final static int array[] = {48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58};
-    static Rectangle screenRect;
+    final static int array[] = {48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58}; //Keycodes for the robot.
+    static Rectangle screenRect; // Screen for the buffered image to search.
 
     public static void createRobot() {
         try {
