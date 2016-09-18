@@ -6,9 +6,8 @@ Task 1 - Mine blocks in front of it, user must state the durability of the picka
 ___Partially done:___
 Task 2 - Intelligently search for Wood, move over to it, and mine it. It looks for the logs. 
 Task 3 - Automagically jump, place wood, and mine it. This is an exploit in the handling of a specific minecraft server (RSMV) which allows you to generate balance.
-*/
-
-package javaapplication12;
+ */
+package minecraftminer;
 //-10004943
 
 import java.awt.Rectangle;
@@ -17,6 +16,8 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 // Christopher Fischer
 public class JavaApplication12 {
@@ -29,7 +30,7 @@ public class JavaApplication12 {
      */
     static int dur; //The durability of the types of pickaxes in the hotbar.
     int tempDur; // The lowest durbility of any one pickaxe.
-    static int crossx; 
+    static int crossx;
     static int crossy;
     final static int array[] = {48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58}; //Keycodes for the robot.
     static Rectangle screenRect; // Screen for the buffered image to search.
@@ -46,7 +47,7 @@ public class JavaApplication12 {
     public static void main(String[] args) {
         createRobot();
         System.out.println("1. Miner (death, dumb, and blind)");
-        System.out.println("2. Wood Cutter (Spruce)");
+        System.out.println("2. Rail Place/Break");
         int c = stdin.nextInt();
 
         switch (c) {
@@ -54,7 +55,13 @@ public class JavaApplication12 {
                 miner();
                 break;
             case 2:
-                woodFinder();
+        {
+            try {
+                railbreak();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(JavaApplication12.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
                 break;
             default:
 
@@ -62,6 +69,22 @@ public class JavaApplication12 {
             // Place
             // Mine
             // Woodcutter job as we know it
+        }
+    }
+
+    public static void railbreak() throws InterruptedException {
+        int x = 0;
+        while (x < 1000) {
+            mineBlock();
+            Thread.sleep(3000);
+            placeBlock();
+            x+=1;
+            if(false){
+                sonny.keyPress(array[9]);
+                x = 0;
+                railbreak();
+                sonny.keyPress(array[0]);
+            }
         }
     }
 
@@ -139,6 +162,18 @@ public class JavaApplication12 {
             sonny.mousePress(InputEvent.BUTTON1_DOWN_MASK);
             Thread.sleep(1500);
             sonny.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    public static void placeBlock(){
+        try {
+            Thread.sleep(1000);
+            sonny.mousePress(InputEvent.BUTTON3_DOWN_MASK);
+            Thread.sleep(3500);
+            sonny.mouseRelease(InputEvent.BUTTON3_DOWN_MASK);
         } catch (Exception e) {
             System.out.println(e);
         }
